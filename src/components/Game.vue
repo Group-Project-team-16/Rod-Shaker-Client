@@ -37,7 +37,8 @@ export default {
       scoreTwo: 0,
       timeRand: 0,
       cekInterval: 100,
-      fishes: 0
+      fishes: 0,
+      newscore1: 0
     }
   },
   methods: {
@@ -58,6 +59,7 @@ export default {
             this.gif = 'idle-p1.gif'
           }, 1500)
         }
+        this.$socket.emit('narik1', this.scoreOne)
       } else {
         if (this.timeBeforeStart < this.timeRand) {
           this.scoreTwo = this.scoreTwo - 10
@@ -74,6 +76,7 @@ export default {
             this.gif2 = 'idle-p2.gif'
           }, 1500)
         }
+        this.$socket.emit('narik2', this.scoreTwo)
       }
     },
     randomTime () {
@@ -101,16 +104,19 @@ export default {
   created () {
     this.interval()
     this.randomTime()
+  },
+  sockets: {
+    narik1 (score) {
+      this.scoreOne = score
+    },
+    narik2 (score) {
+      this.scoreTwo = score
+    }
   }
 }
 </script>
 
 <style>
-
-    #fishes {
-      /* margin-right: 4rem; */
-    }
-
     #btn {
       position: absolute;
     }
