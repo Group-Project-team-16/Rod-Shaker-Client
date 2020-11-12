@@ -14,25 +14,37 @@ export default {
   name: 'Game',
   data () {
     return {
-      gif: 'idle-p1.gif'
+      gif: 'idle-p1.gif',
+      timeBeforeStart: 0
     }
   },
   methods: {
     narik () {
+      this.timeBeforeStart = 0
       this.gif = 'narik-p1.gif'
+      setTimeout(() => {
+        this.gif = 'idle-p1.gif'
+        this.interval()
+      }, 1500)
+    },
+    gantiKeIdle () {
+      this.gif = 'idle-p1.gif'
+    },
+    update () {
+      if (this.timeBeforeStart > 900) {
+        this.gif = 'umpan-dimakan-p1.gif'
+      } else {
+        console.log('less than 200')
+        this.timeBeforeStart++
+      }
+    },
+    interval () {
+      this.timeBeforeStart = 0
+      setInterval(this.update, 10)
     }
-    // },
-    // update () {
-    //   let timeBeforeStart = 0;
-    //   if(timeBeforeStart > 500) {
-
-    //   } else {
-    //     timeBeforeStart++;
-    //   }
-    // },
-    // interval () {
-    //   setInterval(this.update, 10)
-    // }
+  },
+  created () {
+    this.interval()
   }
 }
 </script>
