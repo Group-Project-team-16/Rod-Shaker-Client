@@ -13,6 +13,7 @@
         <button class="btn btn-danger mb-3">Tarik Sist!!</button>
         <h1>Score : 0</h1>
       </div>
+
     </div>
             <!-- <div id="enemy"><img src="sprites/enemy-idle.png"></div> -->
   </div>
@@ -24,36 +25,49 @@ export default {
   data () {
     return {
       gif: 'idle-p1.gif',
-      timeBeforeStart: 0
+      timeBeforeStart: 0,
+      scoreOne: 0,
+      scoreTwo: 0,
+      timeRand: 0,
+      cekInterval: 100
     }
   },
   methods: {
     narik () {
-      this.timeBeforeStart = 0
-      this.gif = 'narik-p1.gif'
-      setTimeout(() => {
-        this.gif = 'idle-p1.gif'
-        this.interval()
-      }, 1500)
+      if (this.timeBeforeStart < this.timeRand) {
+        this.scoreOne = this.scoreOne - 10
+      } else if (this.timeBeforeStart >= this.timeRand) {
+        this.scoreOne = this.scoreOne + 10
+        this.timeBeforeStart = 0
+        this.gif = 'narik-p1.gif'
+        setTimeout(() => {
+          this.gif = 'idle-p1.gif'
+        }, 1500)
+      }
+    },
+    randomTime () {
+      this.timeRand = Math.floor(Math.random() * (90 - 50 + 1)) + 50
     },
     gantiKeIdle () {
       this.gif = 'idle-p1.gif'
     },
     update () {
-      if (this.timeBeforeStart > 900) {
+      if (this.timeBeforeStart > this.timeRand) {
         this.gif = 'umpan-dimakan-p1.gif'
       } else {
-        console.log('less than 200')
         this.timeBeforeStart++
       }
     },
     interval () {
-      this.timeBeforeStart = 0
-      setInterval(this.update, 10)
+      console.log(this.cekInterval, 'cek Interval')
+      setInterval(this.update, this.cekInterval)
+    },
+    start () {
+      this.interval()
     }
   },
   created () {
-    this.interval()
+    this.randomTime()
   }
 }
 </script>
