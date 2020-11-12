@@ -3,7 +3,16 @@
     <div class="flex-container">
       <div id="player"><img v-bind:src="require('../sprites/' + gif)" /></div>
       <div id="playertwo"><img src="../sprites/idle-p2.gif"></div>
-      <button @click="narik"></button>
+    </div>
+    <div class="d-flex justify-content-between" id="container-score">
+      <div id="PlayeroneConsole">
+        <button @click="narik" class="btn btn-primary mb-3">Tarik Sist!!</button>
+        <h1>Score : 0</h1>
+      </div>
+      <div id="PlayerTwoConsole">
+        <button class="btn btn-danger mb-3">Tarik Sist!!</button>
+        <h1>Score : 0</h1>
+      </div>
     </div>
             <!-- <div id="enemy"><img src="sprites/enemy-idle.png"></div> -->
   </div>
@@ -50,9 +59,13 @@ export default {
 </script>
 
 <style>
+    #btn {
+      position: absolute;
+    }
     .flex-container {
       display: flex;
       justify-content: space-around;
+      height: 550px;
     }
 
     #game {
