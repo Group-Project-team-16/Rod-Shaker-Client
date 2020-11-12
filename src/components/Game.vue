@@ -1,8 +1,9 @@
 <template>
   <div class="container" id="game">
     <div class="flex-container">
-      <div id="player"><img src="../sprites/idle-p1.gif"></div>
+      <div id="player"><img v-bind:src="require('../sprites/' + gif)" /></div>
       <div id="playertwo"><img src="../sprites/idle-p2.gif"></div>
+      <button @click="narik"></button>
     </div>
             <!-- <div id="enemy"><img src="sprites/enemy-idle.png"></div> -->
   </div>
@@ -11,8 +12,27 @@
 <script>
 export default {
   name: 'Game',
+  data () {
+    return {
+      gif: 'idle-p1.gif'
+    }
+  },
   methods: {
+    narik () {
+      this.gif = 'narik-p1.gif'
+    }
+    // },
+    // update () {
+    //   let timeBeforeStart = 0;
+    //   if(timeBeforeStart > 500) {
 
+    //   } else {
+    //     timeBeforeStart++;
+    //   }
+    // },
+    // interval () {
+    //   setInterval(this.update, 10)
+    // }
   }
 }
 </script>
