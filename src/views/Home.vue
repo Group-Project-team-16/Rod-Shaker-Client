@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1>Rod Shaker Game</h1>
     <Game />
   </div>
 </template>
