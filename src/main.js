@@ -12,7 +12,12 @@ Vue.use(IconsPlugin)
 Vue.config.productionTip = false
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3001'
+  connection: 'http://localhost:3001',
+  vuex: {
+    store, 
+    mutationPrefix: 'SOCKET_',
+    actionPrefix: 'SOCKET_'
+  }
 }))
 
 new Vue({

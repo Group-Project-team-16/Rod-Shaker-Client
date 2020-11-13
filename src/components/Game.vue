@@ -2,7 +2,7 @@
   <div class="container" id="game">
     <div class="wrapper">
       <div id="player"><img v-bind:src="require('../sprites/' + gif)" /></div>
-      <div id="fishes" :style="'margin-top: ' + fishPos + 'rem'">
+      <div id="fishes" :style="'margin-top: ' + fishPos + 'rem' +'height: 20%'" >
         <div class="d-flex flex-column-reverse bd-highlight mr-3">
           <div v-for="(fish, i) in fishes" :key="i" class="bd-highlight"><img src="../sprites/fish.gif" /></div>
         </div>
@@ -10,11 +10,15 @@
       <div id="playertwo"><img v-bind:src="require('../sprites/' + gif2)" /></div>
     </div>
     <div class="d-flex justify-content-between" id="container-score">
-      <div id="PlayeroneConsole">
+      <div
+      v-if="username == dataUserPlayer1" 
+      id="PlayeroneConsole">
         <button @click="narik(1)" class="btn btn-primary mb-5">Tarik Sist!!</button>
         <h1>Score : {{scoreOne}}</h1>
       </div>
-      <div id="PlayerTwoConsole">
+      <div
+      v-else-if="username == dataUserPlayer2" 
+      id="PlayerTwoConsole">
         <button @click="narik(2)" class="btn btn-danger mb-5">Tarik Sist!!</button>
         <h1>Score : {{scoreTwo}} </h1>
       </div>
@@ -41,6 +45,9 @@ export default {
     }
   },
   methods: {
+    joinRoom (payload) {
+      
+    }, 
     narik (player) {
       if (player === 1) {
         if (this.timeBeforeStart < this.timeRand) {
@@ -113,6 +120,17 @@ export default {
     },
     joinRoom(payload){
       
+    }
+  },
+  computed: {
+    username () {
+      return localStorage.username
+    },
+    dataUserPlayer1 () {
+      return this.$store.state.player1.username
+    },
+    dataUserPlayer2 () {
+      return this.$store.state.player2.username
     }
   }
 }
