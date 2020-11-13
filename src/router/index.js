@@ -31,10 +31,10 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/' && localStorage.getItem('username')) next({ name: 'Home' })
-  else if (to.path === '/home' && !localStorage.getItem('username')) next({ name: 'Login' })
-  else next()
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/' && localStorage.getItem('username')) next({ name: 'Home' })
+//   else if (to.path === '/home' && !localStorage.getItem('username')) next({ name: 'Login' })
+//   else next()
+// })
 
 export default router

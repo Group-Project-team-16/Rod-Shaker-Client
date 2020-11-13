@@ -5,8 +5,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse mr-5" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">E-Commerce</a>
-        <div class="mr-5">
+        <a class="navbar-brand" href="#">Rod-Shaker</a>
+        <div class="ml-auto">
           <button @click="logout" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
         </div>
       </div>
