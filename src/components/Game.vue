@@ -52,8 +52,6 @@ export default {
           this.scoreOne = this.scoreOne - 0
         } else if (this.timeBeforeStart >= this.timeRand) {
           this.fishes = 1
-          // this.fishes++
-          // this.fishPos = this.fishPos - 3
           this.scoreOne = this.scoreOne + 10
           this.timeBeforeStart = 0
           this.gif = 'narik-p1.gif'
