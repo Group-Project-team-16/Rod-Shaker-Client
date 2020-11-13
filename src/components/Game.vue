@@ -11,19 +11,20 @@
     </div>
     <div class="d-flex justify-content-between" id="container-score">
       <div
-      v-if="username == dataUserPlayer1" 
+      v-if="userRole == dataUserPlayer1" 
       id="PlayeroneConsole">
         <button @click="narik(1)" class="btn btn-primary mb-5">Tarik Sist!!</button>
-        <h1>Score : {{scoreOne}}</h1>
+        <h1>My Score : {{scoreOne}}</h1>
+        <h1>Score Another Player: {{scoreTwo}}</h1>
       </div>
       <div
-      v-else-if="username == dataUserPlayer2" 
+      v-else-if="userRole == dataUserPlayer2" 
       id="PlayerTwoConsole">
         <button @click="narik(2)" class="btn btn-danger mb-5">Tarik Sist!!</button>
-        <h1>Score : {{scoreTwo}} </h1>
+        <h1>My Score : {{scoreTwo}} </h1>
+        <h1>Score Another Player: {{scoreOne}}</h1>
       </div>
     </div>
-            <!-- <div id="enemy"><img src="sprites/enemy-idle.png"></div> -->
   </div>
 </template>
 
@@ -45,17 +46,12 @@ export default {
     }
   },
   methods: {
-    joinRoom (payload) {
-      
-    }, 
     narik (player) {
       if (player === 1) {
         if (this.timeBeforeStart < this.timeRand) {
-          this.scoreOne = this.scoreOne - 10
+          this.scoreOne = this.scoreOne - 0
         } else if (this.timeBeforeStart >= this.timeRand) {
           this.fishes = 1
-          // this.fishes++
-          // this.fishPos = this.fishPos - 3
           this.scoreOne = this.scoreOne + 10
           this.timeBeforeStart = 0
           this.gif = 'narik-p1.gif'
@@ -65,14 +61,17 @@ export default {
             this.gif = 'idle-p1.gif'
           }, 1500)
         }
-        this.$socket.emit('narik1', this.scoreOne)
+        let obj = {
+                score: this.scoreOne,
+                role: this.userRole
+            }
+          this.$socket.emit('narikSocket', obj)
+          
       } else {
         if (this.timeBeforeStart < this.timeRand) {
-          this.scoreTwo = this.scoreTwo - 10
+          this.scoreTwo = this.scoreTwo - 0
         } else if (this.timeBeforeStart >= this.timeRand) {
           this.fishes = 1
-          // this.fishes++
-          // this.fishPos = this.fishPos - 3
           this.scoreTwo = this.scoreTwo + 10
           this.timeBeforeStart = 0
           this.gif2 = 'narik-p2.gif'
@@ -82,7 +81,11 @@ export default {
             this.gif2 = 'idle-p2.gif'
           }, 1500)
         }
-        this.$socket.emit('narik2', this.scoreTwo)
+        let obj = {
+                score: this.scoreTwo,
+                role: this.userRole
+            }
+          this.$socket.emit('narikSocket', obj)
       }
     },
     randomTime () {
@@ -112,26 +115,27 @@ export default {
     this.randomTime()
   },
   sockets: {
-    narik1 (score) {
+    scorePlayer1(score){
+      console.log(score, "<<< score");
       this.scoreOne = score
     },
-    narik2 (score) {
+    scorePlayer2(score) {
       this.scoreTwo = score
-    },
-    joinRoom(payload){
-      
     }
   },
   computed: {
-    username () {
-      return localStorage.username
+    userRole () {
+      return localStorage.role
     },
     dataUserPlayer1 () {
-      return this.$store.state.player1.username
+      return this.$store.state.player1.role
     },
     dataUserPlayer2 () {
-      return this.$store.state.player2.username
+      return this.$store.state.player2.role
     }
+  },
+  mounted () {
+    console.log(this.dataUserPlayer1, "<<< mounted data player1");
   }
 }
 </script>
