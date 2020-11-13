@@ -1,6 +1,6 @@
 <template>
   <div class="container" id="game">
-    <div class="flex-container">
+    <div class="wrapper">
       <div id="player"><img v-bind:src="require('../sprites/' + gif)" /></div>
       <div id="fishes" :style="'margin-top: ' + fishPos + 'rem'">
         <div class="d-flex flex-column-reverse bd-highlight mr-3">
@@ -11,14 +11,13 @@
     </div>
     <div class="d-flex justify-content-between" id="container-score">
       <div id="PlayeroneConsole">
-        <button @click="narik(1)" class="btn btn-primary mb-3">Tarik Sist!!</button>
+        <button @click="narik(1)" class="btn btn-primary mb-5">Tarik Sist!!</button>
         <h1>Score : {{scoreOne}}</h1>
       </div>
       <div id="PlayerTwoConsole">
-        <button @click="narik(2)" class="btn btn-danger mb-3">Tarik Sist!!</button>
+        <button @click="narik(2)" class="btn btn-danger mb-5">Tarik Sist!!</button>
         <h1>Score : {{scoreTwo}} </h1>
       </div>
-
     </div>
             <!-- <div id="enemy"><img src="sprites/enemy-idle.png"></div> -->
   </div>
@@ -111,6 +110,9 @@ export default {
     },
     narik2 (score) {
       this.scoreTwo = score
+    },
+    joinRoom(payload){
+      
     }
   }
 }
@@ -156,5 +158,9 @@ export default {
 
     #playertwo img {
       height: 550px;
+    }
+    .wrapper{
+      display: flex;
+      justify-content: center;
     }
 </style>

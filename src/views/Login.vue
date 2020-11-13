@@ -8,7 +8,7 @@
           <div class="form-group mb-3">
             <input v-model="username" type="text" class="form-control form-control-sm " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="username">
           </div>
-          <button type="button" class="btn btn-secondary btn-sm btn-block">Submit</button>
+          <button type="submit" class="btn btn-secondary btn-sm btn-block">Submit</button>
         </form>
       </div>
     </div>
@@ -26,26 +26,12 @@ export default {
   },
   methods: {
     login () {
-      axios({
-        method: 'POST',
-        url: 'http://localhost:3000/users',
-        data: {
-          username: this.username
-        }
-      })
-        .then(response => {
-          localStorage.setItem('username', this.username)
-          this.$router.push('/home')
-        })
-        .catch(err => {
-          console.log(err)
-          this.$router.push('/')
-        })
+      this.$store.dispatch('loginAction', this.username)
     }
   }
 }
 </script>
-<style>
+<style scoped>
   .container{
     align-items: center;
   }
