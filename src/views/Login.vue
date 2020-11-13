@@ -26,33 +26,9 @@ export default {
   },
   methods: {
     login () {
-      // this.$store.dispatch('inputLogin', this.username)
       this.$socket.emit('joinRoom', this.username)
-      // this.$store.dispatch('loginAction', this.username)
     }
   }
-  // sockets: {
-  //   enteringRoomPlayer1(payload) {
-  //     console.log(payload, "<<< payload game components player1");
-  //     let {username, score} = payload
-  //     let dataUser = {
-  //       username,
-  //       score,
-  //       role: "Player 1"
-  //     }
-  //     this.$store.dispatch('inputUser', dataUser)
-  //   },
-  //   enteringRoomPlayer2(payload){
-  //     console.log(payload, "payload game components player2");
-  //     let {username, score} = payload
-  //     let dataUser = {
-  //       username,
-  //       score,
-  //       role: "Player 2"
-  //     }
-  //     this.$store.dispatch('inputUser', dataUser)
-  //   }
-  // }
 }
 </script>
 <style scoped>

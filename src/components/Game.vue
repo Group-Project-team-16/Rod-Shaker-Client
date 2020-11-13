@@ -72,8 +72,6 @@ export default {
           this.scoreTwo = this.scoreTwo - 0
         } else if (this.timeBeforeStart >= this.timeRand) {
           this.fishes = 1
-          // this.fishes++
-          // this.fishPos = this.fishPos - 3
           this.scoreTwo = this.scoreTwo + 10
           this.timeBeforeStart = 0
           this.gif2 = 'narik-p2.gif'
@@ -88,7 +86,6 @@ export default {
                 role: this.userRole
             }
           this.$socket.emit('narikSocket', obj)
-        // this.$socket.emit('narik2', this.scoreTwo)
       }
     },
     randomTime () {
